@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chris &amp; Charlotte's Restaurant Passport</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F2EBDB;
+    --cream-2: #EAE1CC;
+    --paper: #FBF6EA;
+    --ink: #1F1A14;
+    --ink-soft: #4A3F33;
+    --ink-mute: #7A6E5E;
+    --rule: #C7B996;
+    --rule-soft: #DCCFB1;
+    --oxblood: #7B2C1F;
+    --oxblood-deep: #5C1F14;
+    --saffron: #D49B2C;
+    --saffron-deep: #A8761B;
+    --forest: #3C5A3C;
+    --terracotta: #C97A50;
+    --shadow: 0 1px 0 rgba(31,26,20,0.04), 0 6px 18px -10px rgba(31,26,20,0.18);
+    --shadow-card: 0 1px 0 rgba(31,26,20,0.05), 0 10px 30px -16px rgba(31,26,20,0.25);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    /* subtle paper grain */
+    background-image:
+      radial-gradient(rgba(31,26,20,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(31,26,20,0.018) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 2px;
+  }
+  .serif { font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .stamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    border: 1.5px solid var(--oxblood);
+    padding: 4px 8px 3px;
+    display: inline-block;
+    border-radius: 3px;
+    transform: rotate(-2deg);
+    background: rgba(123,44,31,0.04);
+  }
+  .rule {
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+  }
+  button { font-family: inherit; cursor: pointer; }
+  ::selection { background: var(--saffron); color: var(--ink); }
+
+  /* ============== Responsive utilities ============== */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+  .om-section { padding: 88px 0 72px; }
+  .om-section.tight { padding: 56px 0 56px; }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    body { font-size: 15px; }
+    .wrap { padding: 0 24px; }
+    .om-section { padding: 64px 0 56px; }
+    .om-section.tight { padding: 40px 0 40px; }
+  }
+
+  /* Phone */
+  @media (max-width: 600px) {
+    body { font-size: 14.5px; }
+    .wrap { padding: 0 18px; }
+    .om-section { padding: 56px 0 48px; }
+    .om-section.tight { padding: 36px 0 36px; }
+  }
+
+  /* ============== Section-specific mobile rules ============== */
+  /* Cities: home-base card */
+  @media (max-width: 900px) {
+    .home-base-card { padding: 28px !important; min-height: auto !important; }
+    .home-base-number { font-size: clamp(72px, 18vw, 128px) !important; }
+    .stamps-grid { gap: 24px 12px !important; }
+  }
+  @media (max-width: 600px) {
+    .home-base-card { padding: 22px 20px !important; }
+    .home-base-number { font-size: 88px !important; }
+  }
+
+  /* Neighborhood explorer */
+  @media (max-width: 760px) {
+    .nb-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  }
+
+  /* Filter bar */
+  @media (max-width: 700px) {
+    .filter-bar { padding: 14px 14px !important; }
+    .filter-row-1 { gap: 8px !important; }
+    .filter-row-1 .results-count {
+      margin-left: 0 !important;
+      width: 100%;
+      text-align: left;
+      order: 99;
+    }
+    .filter-segmented {
+      flex: 1 1 auto !important;
+    }
+  }
+
+  /* Restaurant cards: more compact on phone */
+  @media (max-width: 600px) {
+    .rest-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Hall of fame */
+  @media (max-width: 1000px) {
+    .hof-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 640px) {
+    .hof-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Cleanup */
+  @media (max-width: 700px) {
+    .cleanup-card { padding: 22px !important; }
+    .cleanup-row {
+      grid-template-columns: 14px 1fr !important;
+      grid-template-areas: "dot name" ". why" !important;
+      row-gap: 4px !important;
+    }
+    .cleanup-row .cleanup-dot { grid-area: dot; }
+    .cleanup-row .cleanup-col { grid-area: name; }
+    .cleanup-row .cleanup-why { grid-area: why; }
+  }
+
+  /* Closed wall: tighter on small screens */
+  @media (max-width: 600px) {
+    .closed-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Footer */
+  @media (max-width: 600px) {
+    .om-footer { padding: 48px 18px 40px !important; }
+  }
+  /* Loading splash before React renders */
+  #__loading {
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+    background: var(--cream);
+    z-index: 1;
+    color: var(--ink-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  #root:not(:empty) + #__loading { display: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="__loading">Plating up&hellip;</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script type="application/json" id="__edit_state">
+/*EDITMODE-BEGIN*/{
+  "accent": "#7B2C1F",
+  "showCleanup": true,
+  "paperGrain": true
+}/*EDITMODE-END*/
+</script>
+</body>
+</html>
